@@ -1,13 +1,20 @@
-import { useContext, createContext, useEffect, useReducer } from "react";
+import {
+  useContext,
+  createContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
+
+import axios from "axios";
 
 const CitiesContext = createContext();
-
-const BASE_URL = "http://localhost:8000";
 
 const initialState = {
   cities: [],
   isLoading: false,
   currentCity: {},
+  deletedCity: false,
   error: "",
 };
 
@@ -44,7 +51,7 @@ function reducer(state, action) {
       return {
         ...state,
         isLoading: false,
-        cities: state.cities.filter((city) => city.id !== action.payload),
+        deletedCity: !state.deleteCity,
         currentCity: {},
       };
 
@@ -65,32 +72,45 @@ function CitiesProvider({ children }) {
     reducer,
     initialState
   );
+  const [isHistoryActive, setIsHistoryActive] = useState(false);
 
-  useEffect(function () {
-    async function fetchCities() {
-      dispatch({ type: "loading" });
-      try {
-        const res = await fetch(`${BASE_URL}/cities`);
-        const data = await res.json();
-        dispatch({ type: "cities/loaded", payload: data });
-      } catch {
-        dispatch({
-          type: "rejected",
-          payload: "There was an error loading data",
-        });
+  useEffect(
+    function () {
+      async function fetchCities() {
+        dispatch({ type: "loading" });
+        try {
+          const res = await axios(
+            `${import.meta.env.VITE_REACT_APP_API_BASEURL}/api/v1/city`,
+            {
+              withCredentials: true,
+            }
+          );
+          dispatch({ type: "cities/loaded", payload: res.data.data.cities });
+        } catch {
+          dispatch({
+            type: "rejected",
+            payload: "There was an error loading data",
+          });
+        }
       }
-    }
-    fetchCities();
-  }, []);
+      fetchCities();
+    },
+    [currentCity]
+  );
 
   async function getCity(id) {
     if (Number(id) === currentCity.id) return;
     try {
       dispatch({ type: "loading" });
 
-      const res = await fetch(`${BASE_URL}/cities/${id}`);
-      const data = await res.json();
-      dispatch({ type: "city/loaded", payload: data });
+      const res = await axios.get(
+        `${import.meta.env.VITE_REACT_APP_API_BASEURL}/api/v1/city/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      dispatch({ type: "city/loaded", payload: res.data.data.city });
     } catch {
       dispatch({
         type: "rejected",
@@ -103,15 +123,21 @@ function CitiesProvider({ children }) {
     try {
       dispatch({ type: "loading" });
 
-      const res = await fetch(`${BASE_URL}/cities`, {
-        method: "POST",
-        body: JSON.stringify(newCity),
-        headers: {
-          "Content-Type": "application/json",
+      const res = await axios.post(
+        `${import.meta.env.VITE_REACT_APP_API_BASEURL}/api/v1/city`,
+        {
+          cityName: newCity.cityName,
+          country: newCity.country,
+          emoji: newCity.emoji,
+          date: newCity.date,
+          notes: newCity.notes,
+          position: newCity.position,
         },
-      });
-      const data = await res.json();
-      dispatch({ type: "city/created", payload: data });
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch({ type: "city/created", payload: res.data.data.city });
     } catch {
       dispatch({
         type: "rejected",
@@ -123,9 +149,12 @@ function CitiesProvider({ children }) {
   async function deleteCity(id) {
     try {
       dispatch({ type: "loading" });
-      await fetch(`${BASE_URL}/cities`, {
-        method: "DELETE",
-      });
+      await axios.delete(
+        `${import.meta.env.VITE_REACT_APP_API_BASEURL}/api/v1/city/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
       dispatch({ type: "city/deleted", payload: id });
     } catch {
       dispatch({
@@ -141,6 +170,8 @@ function CitiesProvider({ children }) {
         cities,
         isLoading,
         currentCity,
+        isHistoryActive,
+        setIsHistoryActive,
         getCity,
         createCity,
         deleteCity,

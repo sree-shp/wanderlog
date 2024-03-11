@@ -1,8 +1,6 @@
-import styles from "./Message.module.css";
-
 function Message({ message }) {
   return (
-    <p className={styles.message}>
+    <p className=" text-white mx-5 text-center">
       <span role="img">👋</span> {message}
     </p>
   );

@@ -1,14 +1,14 @@
 import Sidebar from "../components/Sidebar";
-import styles from "./AppLayout.module.css";
 import Map from "../components/Map";
-import User from "../components/User";
 
 function AppLayout() {
   return (
-    <div className={styles.app}>
-      <Sidebar />
+    <div className="flex flex-col-reverse md:flex-row">
+      <div className="hidden md:flex md:w-[35%]">
+        <Sidebar />
+      </div>
       <Map />
-      <User />
+      {/* <User /> */}
     </div>
   );
 }

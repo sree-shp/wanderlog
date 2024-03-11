@@ -1,9 +1,6 @@
-import styles from "./CountryItem.module.css";
-
 function CountryItem({ country }) {
   return (
-    <li className={styles.countryItem}>
-      <span>{country.emoji}</span>
+    <li className="mx-5 w-[75px] h-[75px] bg-[#f1dcbf] rounded-md flex justify-center items-center">
       <span>{country.country}</span>
     </li>
   );

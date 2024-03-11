@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -18,22 +19,29 @@ function reducer(state, action) {
   }
 }
 
-const FAKE_USER = {
-  name: "Jack",
-  email: "jack@example.com",
-  password: "qwerty",
-  avatar: "https://i.pravatar.cc/100?u=zz",
-};
-
 export function AuthProvider({ children }) {
   const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
     initialState
   );
 
-  function login(email, password) {
-    if (email === FAKE_USER.email && password === FAKE_USER.password)
-      dispatch({ type: "login", payload: FAKE_USER });
+  async function login(email, password) {
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_REACT_APP_API_BASEURL}/api/v1/user/login`,
+        {
+          email: email,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(res);
+      dispatch({ type: "login", payload: res.data.data.user });
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   function logout() {

@@ -5,7 +5,8 @@ function BackButton() {
   const navigate = useNavigate();
 
   return (
-    <Button
+    <button
+      className="font-medium text-[#f1dcbf] bg-[#192939] px-4 py-2 rounded-md"
       type="back"
       onClick={(e) => {
         e.preventDefault();
@@ -13,7 +14,7 @@ function BackButton() {
       }}
     >
       &larr; Back
-    </Button>
+    </button>
   );
 }
 

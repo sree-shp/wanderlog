@@ -1,25 +1,30 @@
-import styles from "./Homepage.module.css";
 import { Link } from "react-router-dom";
 import PageNav from "../components/PageNav";
 export default function Homepage() {
   return (
-    <main className={styles.homepage}>
+    <div className="">
       <PageNav />
-      <section>
-        <h1>
-          You travel the world.
-          <br />
-          WorldWise keeps track of your adventures.
-        </h1>
-        <h2>
-          A world map that tracks your footsteps into every city you can think
-          of. Never forget your wonderful experiences, and show your friends how
-          you have wandered the world.
-        </h2>
-        <Link to="/login" className="cta">
-          Start Tracking now
-        </Link>
-      </section>
-    </main>
+
+      <main className="h-screen bg-[#192939] text-white  flex flex-col justify-center items-center">
+        <section className="h-[300px] text-center flex flex-col gap-10 items-center justify-around">
+          <h1 className="text-4xl font-medium tracking-widest text-[#f1dcbf] md: text-5xl">
+            WANDERLOG
+          </h1>
+          <div className="h-[200px] flex flex-col justify-around items-center">
+            <h1>
+              You travel the world.
+              <br />
+              WanderLog keeps track of your adventures.
+            </h1>
+            <Link
+              to="/login"
+              className="w-[60%] bg-[#f1dcbf] text-[#192939] font-medium rounded-md py-2 px-4"
+            >
+              Start Tracking now
+            </Link>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }

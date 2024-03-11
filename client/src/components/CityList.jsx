@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import CityItem from "./CityItem.jsx";
-import styles from "./CityList.module.css";
 import Spinner from "./Spinner.jsx";
 import Message from "./Message.jsx";
 import { useCities } from "../contexts/CitiesContext.jsx";
@@ -19,7 +18,11 @@ function CityList() {
     return <CityItem city={cityItem} key={cityItem.id} />;
   }
 
-  return <ul className={styles.cityList}>{cities.map(createCityItem)}</ul>;
+  return (
+    <ul className="flex flex-col gap-5 mx-5 overflow-auto md:mx-10">
+      {cities.map(createCityItem)}
+    </ul>
+  );
 }
 
 export default CityList;

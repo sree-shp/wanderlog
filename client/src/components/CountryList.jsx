@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import CountryItem from "./CountryItem.jsx";
-import styles from "./CountryList.module.css";
+
 import Spinner from "./Spinner.jsx";
 import Message from "./Message.jsx";
 import { useCities } from "../contexts/CitiesContext.jsx";
@@ -31,7 +31,9 @@ function CountryList() {
   }
 
   return (
-    <ul className={styles.countryList}>{countries.map(createCountryItem)}</ul>
+    <ul className="flex flex-row flex-wrap gap-5 mx-5 overflow-auto">
+      {countries.map(createCountryItem)}
+    </ul>
   );
 }
 

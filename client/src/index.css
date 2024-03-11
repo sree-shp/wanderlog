@@ -2,8 +2,12 @@
 @import "https://unpkg.com/leaflet@1.9.3/dist/leaflet.css";
 @import "https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* These CSS variables are global, so they are available in all CSS modules */
-:root {
+/* :root {
   --color-brand--1: #ffb545;
   --color-brand--2: #00c46a;
 
@@ -66,4 +70,4 @@ input:focus {
   font-weight: 600;
   padding: 1rem 3rem;
   border-radius: 5px;
-}
+} */

@@ -1,14 +1,9 @@
-// "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
-
 import { useEffect, useState } from "react";
-import styles from "./Form.module.css";
-import Button from "./Button";
 import BackButton from "./BackButton";
 import Message from "./Message";
 import Spinner from "./Spinner";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 import { useCities } from "../contexts/CitiesContext";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +19,7 @@ export function convertToEmoji(countryCode) {
 const BASE_URL = "https://api.bigdatacloud.net/data/reverse-geocode-client";
 function Form() {
   const [lat, lng] = useUrlPosition();
-  const { createCity, isLoading } = useCities();
+  const { createCity } = useCities();
   const navigate = useNavigate();
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
@@ -42,7 +37,6 @@ function Form() {
       async function fetchCityData() {
         try {
           setIsLoadingGeocoding(true);
-          console.log(lat, lng);
           const res = await fetch(
             `${BASE_URL}?latitude=${lat}&longitude=${lng}`
           );
@@ -80,6 +74,7 @@ function Form() {
       notes,
       position: { lat, lng },
     };
+    console.log(newCity);
 
     await createCity(newCity);
     navigate("/app/cities");
@@ -94,45 +89,53 @@ function Form() {
 
   return (
     <form
-      className={`${styles.form} ${isLoading ? styles.loading : ""}`}
+      className="h-[250px] md:h-[400px] bg-[#f1dcbf] mx-5 px-2 py-4 rounded-lg overflow-auto flex flex-col gap-4"
       onSubmit={handleSubmit}
     >
-      <div className={styles.row}>
-        <label htmlFor="cityName">City name</label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="cityName" className="">
+          City name
+        </label>
         <input
           id="cityName"
           onChange={(e) => setCityName(e.target.value)}
           value={cityName}
+          className="px-2 py-2 rounded-md"
         />
-        {/* <span className={styles.flag}>{emoji}</span> */}
       </div>
 
-      <div className={styles.row}>
-        <label htmlFor="date">When did you go to {cityName}?</label>
-        {/* <input
-          id="date"
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
-        /> */}
+      <div className="flex flex-col gap-2">
+        <label htmlFor="date" className="">
+          When did you go to {cityName}?
+        </label>
         <DatePicker
           id="date"
           onChange={(date) => setDate(date)}
           selected={date}
           dateFormat="dd/MM/yyyy"
+          className="w-full px-2 py-2 rounded-md"
         />
       </div>
 
-      <div className={styles.row}>
-        <label htmlFor="notes">Notes about your trip to {cityName}</label>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="notes" className="">
+          Notes about your trip to {cityName}
+        </label>
         <textarea
           id="notes"
           onChange={(e) => setNotes(e.target.value)}
           value={notes}
+          className="w-full px-2 py-2 rounded-md"
         />
       </div>
 
-      <div className={styles.buttons}>
-        <Button type="primary">Add</Button>
+      <div className="flex flex-row justify-between items-center">
+        <button
+          className="font-medium text-[#f1dcbf] bg-[#192939] px-4 py-2 rounded-md"
+          type="primary"
+        >
+          Add
+        </button>
         <BackButton />
       </div>
     </form>
