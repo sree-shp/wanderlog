@@ -7,6 +7,7 @@ import {
 } from "react";
 
 import axios from "axios";
+import { useAuth } from "./AuthContext";
 
 const CitiesContext = createContext();
 
@@ -72,6 +73,7 @@ function CitiesProvider({ children }) {
     reducer,
     initialState
   );
+  const { isAuthenticated } = useAuth();
   const [isHistoryActive, setIsHistoryActive] = useState(false);
 
   useEffect(
@@ -95,7 +97,7 @@ function CitiesProvider({ children }) {
       }
       fetchCities();
     },
-    [currentCity]
+    [currentCity, isAuthenticated]
   );
 
   async function getCity(id) {
