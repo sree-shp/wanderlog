@@ -88,6 +88,7 @@ exports.login = async (req, res, next) => {
 exports.protect = async (req, res, next) => {
   let token;
   try {
+    console.log(req.headers);
     const token = req.headers.cookie.split("=")[1];
 
     // If there is no token, throw new error
