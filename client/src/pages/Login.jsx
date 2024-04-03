@@ -39,11 +39,11 @@ export default function Login() {
       <PageNav />
       <div className="px-5">
         <main className=" my-[5rem] mx-auto rounded-lg  w-[100%] max-w-[350px] md:max-w-[650px] flex flex-col md:flex-row md:justify-stretch justify-center items-center bg-[#303e4d] text-white">
-          <section className=" text-center w-full flex flex-col gap-5 items center md:w-[50%] md:h-[400px] md:rounded-md rounded-t-md  justify-center bg-[url('login-img.jpg')] bg-fit bg-no-repeat px-5 py-5">
-            <h1 className=" text-4xl font-bold tracking-widest text-[#192939] ">
+          <section className=" text-center w-full flex flex-col gap-5 items center md:w-[50%] md:h-[400px] md:rounded-md rounded-t-md  justify-center bg-[url('login-img.jpg')] bg-fit bg-no-repeat bg-top px-5 py-5">
+            <h1 className=" text-4xl font-bold tracking-widest text-[#f1dcbf]">
               WANDERLOG
             </h1>
-            <p className=" text-[#192939] text-lg font-normal hidden md:block">
+            <p className=" text-[#f1dcbf] text-lg font-normal hidden md:block">
               Ready to embark on another adventure? Log in now and let's pick up
               where you left off.
             </p>

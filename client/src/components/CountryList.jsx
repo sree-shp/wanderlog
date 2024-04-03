@@ -24,7 +24,6 @@ function CountryList() {
 
     []
   );
-  console.log(countries);
 
   function createCountryItem(Country) {
     return <CountryItem country={Country} key={Country.country} />;

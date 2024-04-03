@@ -46,7 +46,6 @@ export function AuthProvider({ children }) {
       setLoading(false);
       setError("Something went Wrong");
       setTimeout(() => setError(""), 3000);
-      console.log(err.message);
     }
   }
 
@@ -77,8 +76,6 @@ export function AuthProvider({ children }) {
     } catch (err) {
       setLoading(false);
       setError("Something went Wrong");
-      setTimeout(() => setError(""), 3000);
-      console.log(err.message);
     }
   }
 
