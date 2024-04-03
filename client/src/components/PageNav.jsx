@@ -5,7 +5,7 @@ import Logo from "./Logo";
 function PageNav() {
   const [isActive, setIsActive] = useState(false);
   return (
-    <nav className="fixed top-0 left-0 w-full bg-[#192939] flex flex-row items-center justify-between md:px-5 ">
+    <nav className=" w-full py-[1.5rem] bg-[#192939] flex flex-row items-center justify-between md:px-5 lg:px-[4rem] ">
       <Logo />
       <div
         className="relative z-[1000] flex flex-col justify-between gap-1.5 mr-5 md:hidden "
@@ -51,33 +51,13 @@ function PageNav() {
               </NavLink>
             </div>
           </li>
-          <li>
-            <NavLink to="/" className="font-medium text-md">
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/pricing" className="font-medium text-md">
-              Pricing
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/product" className="font-medium text-md">
-              Product
-            </NavLink>
-          </li>
         </ul>
       </div>
       <ul className=" hidden md:flex md:flex-row md:gap-10 md:mr-5 text-[#f1dcbf] lg:flex">
         <li>
           <NavLink to="/">Home</NavLink>
         </li>
-        {/* <li>
-          <NavLink to="/pricing">Pricing</NavLink>
-        </li>
-        <li>
-          <NavLink to="/product">Product</NavLink>
-        </li> */}
+
         <li>
           <NavLink to="/login" className="">
             Login
