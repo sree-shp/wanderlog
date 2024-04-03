@@ -44,7 +44,7 @@ function Signup() {
       <PageNav />
       <div className="px-5">
         <main className=" my-[5rem] mx-auto rounded-lg  w-[100%] max-w-[350px] md:max-w-[650px] flex flex-col md:flex-row md:justify-stretch justify-center items-center bg-[#303e4d] text-white">
-          <section className=" text-center w-full flex flex-col gap-5 items center md:w-[50%] md:h-[600px] md:rounded-md rounded-t-md  justify-center bg-login bg-fit bg-no-repeat px-5 py-5">
+          <section className=" text-center w-full flex flex-col gap-5 items center md:w-[50%] md:h-[600px] md:rounded-md rounded-t-md  justify-center bg-[url('login-img.jpg')] bg-fit bg-no-repeat px-5 py-5">
             <h1 className=" text-4xl font-bold tracking-widest text-[#192939] ">
               WANDERLOG
             </h1>
